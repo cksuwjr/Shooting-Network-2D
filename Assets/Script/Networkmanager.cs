@@ -9,8 +9,13 @@ public class Networkmanager : MonoBehaviourPunCallbacks
 {
     void Awake()
     {
+        Screen.SetResolution(700, 500, false);
+
         PhotonNetwork.ConnectUsingSettings();
         // 서버 연결
+        PhotonNetwork.SendRate = 60;
+        PhotonNetwork.SerializationRate = 30;
+        // 동기화 빠르게?
     }
 
     public void Connect() => PhotonNetwork.ConnectUsingSettings();
@@ -35,6 +40,16 @@ public class Networkmanager : MonoBehaviourPunCallbacks
         // 플레이어 복사
         // 복사는 반드시 PhotonNetwork.Instantiate("Resaurces안의 복사할 Prefab 이름", 벡터값, 회전값); 
     }
-    void Update() { if (Input.GetKeyDown(KeyCode.Escape) && PhotonNetwork.IsConnected) PhotonNetwork.Disconnect(); }
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape) && PhotonNetwork.IsConnected) PhotonNetwork.Disconnect();
+
+        if (Input.GetKeyDown(KeyCode.Space) && PhotonNetwork.IsConnected) 
+        {
+            Spawn();
+            StartCoroutine("DestroyBullet");
+            
+        }
+    }
 
 }

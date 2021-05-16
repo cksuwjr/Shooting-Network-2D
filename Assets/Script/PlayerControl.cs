@@ -20,7 +20,6 @@ public class PlayerControl : MonoBehaviour, IPunObservable
 
     void Awake()
     {
-        Screen.SetResolution(1920, 1080, false);
         Nickname.text = "Player";
         Health.color = PV.IsMine ? Color.green : Color.red;
 
@@ -87,7 +86,7 @@ public class PlayerControl : MonoBehaviour, IPunObservable
                 moveSpeed = 0.0f;
             }
             // 스페이스 총알 발사
-            if (Input.GetKeyDown(KeyCode.Q) && ShotCooltime < 0)
+            if (Input.GetKeyDown(KeyCode.E) && ShotCooltime < 0)
             {// PhotonNetwork.Instantiate("스프라이트", 위치      flipX가 true면 Player위치에서 x기준 -0.4,false면 0.4 , y기준 -0.11, z: 0, 회전 값:그대로); 
              // 총알 소환
              //ShotCooltime = 0.375f;
@@ -142,7 +141,10 @@ public class PlayerControl : MonoBehaviour, IPunObservable
         }
     }
     [PunRPC]
-    void DestroyRPC() => Destroy(gameObject);
+    void DestroyRPC()
+    {
+        Destroy(gameObject);
+    }
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)   // IPunObservable 상속받아 재정의
     {
         if (stream.IsWriting)      // if(IsWriting): 보낼때
