@@ -8,14 +8,15 @@ public class Click : MonoBehaviour
     public void OnClickStart ()
     {
         GameObject.Find("NotDestroyObject").GetComponent<NotDestroy>().RegisterObject();
-        SceneManager.LoadScene("PlayScene");
+        LoadingSceneManager.LoadScene("PlayScene");
     }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Return))
         {
             GameObject.Find("NotDestroyObject").GetComponent<NotDestroy>().RegisterObject();
-            SceneManager.LoadScene("PlayScene");
+            LoadingSceneManager.LoadScene("PlayScene");
+
         }
 
     }
